@@ -9,6 +9,20 @@ const Card = ({weatherObj, locationName}) => {
     var timezone = weatherObj.timezone;
     var time = date.toLocaleString('en-US', {weekday:'short', month:'short', day:'2-digit', timeZone: timezone});
 
+    function getStyle(weather) {
+        var style ='';
+        switch(weather){
+        case 'Clear'          : style = 'bg-[#FFBA08] text-black';   break;
+        case 'Thunderstorm'   : style = 'bg-[#240046] text-white';   break;
+        case 'Clouds'         : style = 'bg-[#0096C7] text-white';   break;
+        case 'Snow'           : style = 'bg-[#0096C7] text-white';   break;
+        case 'Rain'           : style = 'bg-[#03045E] text-white';   break;
+        case 'Drizzle'        : style = 'bg-[#005F73] text-white';   break;
+        default               : style = 'bg-[#0096C7] text-black'; 
+        }
+        return style;
+  }
+
     function getIcon(item) {
         var icon = '';
         switch(item) {
@@ -24,10 +38,10 @@ const Card = ({weatherObj, locationName}) => {
     }
 
     return(
-        <div className='flex  justify-center '>
+        <div className='flex  justify-center opacity-100'>
             <div className='my-4'>
                 <div className="flex justify-center">
-                    <div className='rounded-3xl bg-white shadow-lg xl:w-[50rem] bg-yellow-400 p-2'>
+                    <div className={'rounded-3xl bg-white shadow-lg xl:w-[50rem] p-2 ' + getStyle(weatherObj.current.weather[0].main)}>
                         <div className=''>
                             <div className='grid grid-cols-3 grid-rows-2  m-6'>
                                 <p className='font-Ubuntu text-8xl font-bold'>

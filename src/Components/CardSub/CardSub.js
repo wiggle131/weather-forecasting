@@ -27,7 +27,7 @@ const CardSub = ({hourlyWeather, timezone}) => {
        <div class="flex justify-center ">
         {
             hourlyWeather.slice(1, 6).map((item) => (
-                <div class="rounded-lg shadow-lg bg-white max-w-sm h-28 w-24 mb-4 mx-6">
+                <div class="rounded-lg shadow-lg bg-white max-w-sm h-28 w-24 mb-4 mx-6 text-black">
                     <div class=" grid grid-rows-3 ">
                         <div class="content-start grid place-content-center text-xl font-semibold mb-2">
                             {utcToLocalTime(item.dt)}

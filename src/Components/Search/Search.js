@@ -12,7 +12,7 @@ const Search = ({changeLoc}) => {
     }
 
     return(
-       <div class="flex justify-center">
+       <div class="flex justify-center opacity-100">
         <div class="mb-3 xl:w-[54rem]">
             <div class="input-group relative flex flex-wrap xl:flex-nowrap xl:flex-row items-stretch w-full mb-4">
                 <input  type="search" class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-l-3xl transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
