@@ -9,13 +9,7 @@ function App() {
   const [location,setLocation] = useState({lat: 10,lng: 10, locationName:"Africa"});
   const [weatherObj,setWeatherObj] = useState(null);
   const key = 'f46b2dea6c0bb0041fc6d8feeb5c21aa';
-  
-  const variants = {
-    Clouds : {backgroundImage: [ 'linear-gradient(red,yellow)'], opacity:[.65, 1]},
-    Clear :  {backgroundImage: [ 'linear-gradient(blue,green)'], opacity:[.65, 1]},
-    Rain :   {backgroundColor: [ 'hsl(239, 94, 19)', 'hsl(201, 100, 36)'] },
-  }
-  
+
   const changeLoc = (queryLoc) => {
       locationToCoord(queryLoc)
         .then(res => setLocation({
@@ -64,20 +58,15 @@ function App() {
     console.log(weatherObj)
   },[location.lat,location.lng]);
   const temp = true;
-  console.log(weatherObj)
+
 //  + getGradient((weatherObj != null) ? weatherObj.current.weather[0].main : 'Clouds')
   return (
-    <motion.div
-      animate={(weatherObj != null) ? weatherObj.current.weather[0].main : 'Clouds'}
-      variants = {variants}
-      transition={{ease: "circIn", duration: .5}}
-      exit={{opacity: .65}}
-      className={'flex flex-col justify-center h-screen'}>
-      <Search className='' changeLoc={changeLoc}/>
+    <div className={'flex flex-col justify-center h-screen background-animate ' + getGradient((weatherObj != null) ? weatherObj.current.weather[0].main : 'Clouds')}>
+      <Search changeLoc={changeLoc}/>
       {(weatherObj != "Error" && weatherObj != null) ? (
-        <Card className='opacity-100' weatherObj={weatherObj} locationName = {location.locationName}/>
-      ) : (<p className='opacity-100'>Error...</p>)}
-    </motion.div>
+        <Card weatherObj={weatherObj} locationName = {location.locationName}/>
+      ) : (<p>Error...</p>)}
+    </div>
   );
 }
 

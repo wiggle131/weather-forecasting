@@ -41,7 +41,7 @@ const Card = ({weatherObj, locationName}) => {
         <div className='flex  justify-center opacity-100'>
             <div className='my-4'>
                 <div className="flex justify-center">
-                    <div className={'rounded-3xl bg-white shadow-lg xl:w-[50rem] p-2 ' + getStyle(weatherObj.current.weather[0].main)}>
+                    <div className={'rounded-3xl shadow-lg xl:w-[50rem] p-2 background-animate  ' + getStyle(weatherObj.current.weather[0].main)}>
                         <div className=''>
                             <div className='grid grid-cols-3 grid-rows-2  m-6'>
                                 <p className='font-Ubuntu text-8xl font-bold'>
@@ -72,11 +72,11 @@ const Card = ({weatherObj, locationName}) => {
                                 <div className='font-Ubuntu text-5xl grid grid-flow-col justify-end content-center'>
                                     <Icon path={mdiWeatherWindy} size='3rem'/> 
                                     {weatherObj.current.wind_speed}km/h
-                                </div>
+                                </div> 
                             </div> 
                             <div className='flex flex-row justify-around'>
-                                <CardSub hourlyWeather={weatherObj.hourly} timezone={timezone}/>
-                            </div> 
+                                    <CardSub hourlyWeather={weatherObj.hourly} timezone={timezone}/>
+                            </div>
                         </div>
                     </div>
                 </div>
