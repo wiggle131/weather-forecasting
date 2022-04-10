@@ -79,9 +79,9 @@ const Card = ({weatherObj, locationName, count}) => {
                                             transition={{ duration: .5,delay:.5, ease:'easeInOut'}}
                                             className='flex flex-row justify-end  py-1'
                                         >
-                                        <div className='flex flex-row truncate items-center'>
+                                        <div className='flex flex-row   items-center'>
                                             <Icon path={mdiMapMarker} className='w-7 h-auto'/>
-                                            {locationName}
+                                            <p className='flex-nowrap'>{locationName}</p>
                                         </div>
                                     </motion.div>
                                     
@@ -89,7 +89,7 @@ const Card = ({weatherObj, locationName, count}) => {
                                 </div>
                                 {/* Thunderstorm 3xl */}
                                 <div className= {'font-Ubuntu grid grid-flow-col  justify-start content-center items-center ' 
-                                                + (weatherObj.current.weather[0].main === "thunderstorm" ? "text-sm md:text-base lg:text-3xl": "text-xl g:text-5xl")
+                                                + (weatherObj.current.weather[0].main === "thunderstorm" ? "text-sm md:text-base lg:text-3xl": "text-xl lg:text-5xl")
                                             }> 
                                     <Icon path={getIcon(weatherObj.current.weather[0].main)} className='w-4 md:w-12 h-auto'/> 
                                     <p className='md:ml-2'>{weatherObj.current.weather[0].main}</p>

@@ -13,11 +13,12 @@ function App() {
 
   const changeLoc = (queryLoc) => {
       locationToCoord(queryLoc)
-        .then(res => setLocation({
+        .then(res =>
+           setLocation({
             ...location,
-            lat: res.data[0].latitude,
-            lng: res.data[0].longitude,
-            locationName: res.data[0].label
+            lat: res[0].lat,
+            lng: res[0].lon,
+            locationName: res[0].namedetails.name
           })
         .catch(err => console.log(err))
       );
@@ -33,8 +34,8 @@ function App() {
   }
 
    async function locationToCoord(reqLocation) {
-    const accesskey = "cb92efa0d31b38646eb5a6e5b8878e28";
-    const response = await fetch(`http://api.positionstack.com/v1/forward?access_key=${accesskey}&query=${reqLocation}`)
+    const accesskey = "pk.457edd6be3adbe9be73a702e0767513f";
+    const response = await fetch(`https://us1.locationiq.com/v1/search.php?key=${accesskey}&q=${reqLocation}&namedetails=1&format=json`)
         .then(response => response.json())
         .catch(er => console.error(er));
     return response;
