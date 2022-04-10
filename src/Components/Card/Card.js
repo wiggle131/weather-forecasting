@@ -1,9 +1,10 @@
 import React from "react";
 import { mdiWaterPercent,mdiMapMarker,mdiCalendarMonth,mdiWeatherWindy,mdiWeatherSunny, mdiWeatherCloudyAlert, mdiWeatherLightning ,mdiWeatherCloudy ,mdiWeatherSnowy ,mdiWeatherPouring ,mdiWeatherRainy} from '@mdi/js'; 
 import Icon from '@mdi/react'
+import { motion } from "framer-motion";
 import CardSub from "../CardSub/CardSub";
 
-const Card = ({weatherObj, locationName}) => {
+const Card = ({weatherObj, locationName, count}) => {
 
     var date = new Date((weatherObj.current.dt) * 1000);
     var timezone = weatherObj.timezone;
@@ -38,48 +39,75 @@ const Card = ({weatherObj, locationName}) => {
     }
 
     return(
-        <div className='flex  justify-center opacity-100'>
+        <div className='flex  justify-center opacity-100  z-50'>
             <div className='my-4'>
-                <div className="flex justify-center">
-                    <div className={'rounded-3xl shadow-lg xl:w-[50rem] p-2 background-animate  ' + getStyle(weatherObj.current.weather[0].main)}>
-                        <div className=''>
-                            <div className='grid grid-cols-3 grid-rows-2  m-6'>
-                                <p className='font-Ubuntu text-8xl font-bold'>
-                                     {weatherObj.current.feels_like.toFixed(0)}°C
-                                </p>
-                                <div className='grid col-start-2 col-span-2 justify-end content-center'>
-                                    <div className='text-xl font-regular font-Open_Sans'>
-                                        <div className='flex flex-row items-center'>
-                                            <Icon path={mdiCalendarMonth} size='1.25rem'/>
+                <motion.div
+                     initial={{y: 0, opacity:0}}
+                     animate={{y: 12,opacity:1}}
+                     exit={{y: 12,opacity:1}}
+                     transition={{ duration: 1,type:'spring', ease:'easeInOut'}} 
+                     key={count} 
+                    className={"flex justify-center shadow-lg  rounded-3xl "+ getStyle(weatherObj.current.weather[0].main)}>
+                    <motion.div
+                     initial={{y:0,opacity:0}}
+                     animate={{y:12, opacity:1}}
+                     exit={{y: 0, opacity:1}}
+                     transition={{ duration: 1, ease:'easeInOut'}} 
+                     key={count}
+                     className=' w-[20rem] md:w-[40rem] lg:w-[50rem] p-2   '>
+                            <div className='grid grid-cols-3 grid-rows-3 lg:grid-rows-2 m-6'>
+                                    <div className='grid col-span-3 lg:col-span-1 justify-items-center lg:justify-items-start font-Ubuntu text-8xl font-bold'>
+                                        {weatherObj.current.feels_like.toFixed(0)}°C
+                                    </div>
+                                <div className='grid grid-flow-col lg:grid-flow-row col-span-3 lg:col-start-2 lg:col-span-2 lg:justify-end content-center overflow-hidden text-xl  font-regular font-Open_Sans '>
+                                    <motion.div
+                                            initial={{x:100}}
+                                            animate={{x:0}}
+                                            exit={{x:100}}
+                                            transition={{ duration: .5,delay:.5, ease:'easeInOut'}}
+                                            className='flex flex-col justify-end lg:mr-3 py-1'
+                                        >
+                                        <div className='flex flex-row '>
+                                            <Icon path={mdiCalendarMonth} className='w-7 h-auto'/>
                                             {time}
                                         </div>
-                                        <div className='flex flex-row items-center'>
-                                            <Icon path={mdiMapMarker} size='1.25rem'/>
+                                        </motion.div>
+                                    <motion.div
+                                            initial={{x:100}}
+                                            animate={{x:0}}
+                                            exit={{x:100}}
+                                            transition={{ duration: .5,delay:.5, ease:'easeInOut'}}
+                                            className='flex flex-row justify-end  py-1'
+                                        >
+                                        <div className='flex flex-row truncate items-center'>
+                                            <Icon path={mdiMapMarker} className='w-7 h-auto'/>
                                             {locationName}
                                         </div>
-                                    </div>
+                                    </motion.div>
+                                    
 
                                 </div>
                                 {/* Thunderstorm 3xl */}
-                                <div className= {'font-Ubuntu grid grid-flow-col  justify-start content-center ' + (weatherObj.current.weather[0].main === "thunderstorm" ? "text-3xl": "text-5xl")}> 
-                                    <Icon path={getIcon(weatherObj.current.weather[0].main)} size='3rem'/> 
-                                    {weatherObj.current.weather[0].main}
+                                <div className= {'font-Ubuntu grid grid-flow-col  justify-start content-center items-center ' 
+                                                + (weatherObj.current.weather[0].main === "thunderstorm" ? "text-sm md:text-base lg:text-3xl": "text-xl g:text-5xl")
+                                            }> 
+                                    <Icon path={getIcon(weatherObj.current.weather[0].main)} className='w-4 md:w-12 h-auto'/> 
+                                    <p className='md:ml-2'>{weatherObj.current.weather[0].main}</p>
+                               </div>
+                                <div className='py-1 font-Ubuntu text-xl md:text-5xl grid grid-flow-col justify-center items-center place-content-center'>
+                                    <Icon path={mdiWaterPercent} className='w-4 md:w-12 h-auto'/> 
+                                    <p className='md:ml-2'>{weatherObj.current.humidity}%</p>
                                 </div>
-                                <div className='font-Ubuntu text-5xl grid grid-flow-col place-content-center'>
-                                    <Icon path={mdiWaterPercent} size='3rem'/> 
-                                   {weatherObj.current.humidity}%
-                                </div>
-                                <div className='font-Ubuntu text-5xl grid grid-flow-col justify-end content-center'>
-                                    <Icon path={mdiWeatherWindy} size='3rem'/> 
-                                    {weatherObj.current.wind_speed}km/h
+                                <div className='font-Ubuntu text-xl md:text-5xl grid grid-flow-col justify-end items-center content-center'>
+                                    <Icon path={mdiWeatherWindy}  className='w-4 md:w-8 lg:w-12 h-auto flex '/> 
+                                    <p className='md:ml-2'>{weatherObj.current.wind_speed}<span className='text-sm lg:text-3xl'>km/h</span></p>
                                 </div> 
                             </div> 
                             <div className='flex flex-row justify-around'>
                                     <CardSub hourlyWeather={weatherObj.hourly} timezone={timezone}/>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             </div>
         </div>
     );

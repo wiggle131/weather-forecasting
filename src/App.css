@@ -15,3 +15,13 @@
       background-position: 100% 50%;
     }
   }
+
+.hide-scroll {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll; 
+}
+
+.hide-scroll::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
