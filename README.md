@@ -10,4 +10,4 @@ can be with weather prediction in the next 24 hours.
 
 ## Figma Design
 The UI was designed using Figma
-[Figma Link](https://www.figma.com/file/0ZWKvj6KEz435rfLMxhKX5/Untitled?node-id=0%3A1)
+[Link](https://www.figma.com/file/0ZWKvj6KEz435rfLMxhKX5/Untitled?node-id=0%3A1)
