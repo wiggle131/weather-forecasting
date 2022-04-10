@@ -39,7 +39,7 @@ const Card = ({weatherObj, locationName, count}) => {
     }
 
     return(
-        <div className='flex  justify-center opacity-100  z-50'>
+        <div className='flex relative  md:static justify-center opacity-100  z-50'>
             <div className='my-4'>
                 <motion.div
                      initial={{y: 0, opacity:0}}
